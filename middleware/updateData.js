@@ -1,10 +1,10 @@
   //===================  CAPITALIZE FIRST LETTER IN FIRS|LAST NAME ===================
-export const capitalizeName = (req, res, next) =>{
+export const sanitizeName = (req, res, next) =>{
     try {
         const user = req.body
-        
-        user.firstName = user.firstName.charAt(0).toUpperCase() + user.firstName.slice(1)
-        user.lastName = user.lastName.charAt(0).toUpperCase() + user.lastName.slice(1)
+        const {firstName, lastName} = req.body
+        user.firstName = firstName.charAt(0).toUpperCase() + firstName.slice(1)
+        user.lastName = lastName.charAt(0).toUpperCase() + lastName.slice(1)
         
        next()
     } catch (error) {
@@ -12,8 +12,8 @@ export const capitalizeName = (req, res, next) =>{
     }
 }
 
- //===================  CONVERT AGE|CLASS NR - IN NUMBER ===================
-export const convertInNum = (req, res, next)=>{
+ //===================  CONVERT AGE|CLASS: STRING --> IN NUMBER ===================
+export const stringToNumbers = (req, res, next)=>{
     try {
         const user = req.body
         user.age = +user.age;
